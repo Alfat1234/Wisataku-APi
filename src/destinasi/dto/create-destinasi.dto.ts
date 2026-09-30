@@ -1,23 +1,23 @@
-import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty, IsString, IsOptional, IsNumber } from 'class-validator';
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+import { IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
 
 export class CreateDestinasiDto {
-  @ApiProperty({ example: 'Pantai Kuta', description: 'Nama destinasi wisata' })
+  @ApiProperty({ example: 'Candi Borobudur' })
   @IsString()
   @IsNotEmpty()
   nama: string;
 
-  @ApiProperty({ example: 'Badung, Bali', description: 'Lokasi destinasi' })
+  @ApiProperty({ example: 'Budaya' })
   @IsString()
   @IsNotEmpty()
-  lokasi: string;
+  kategori: string;
 
-  @ApiProperty({ example: 'Pantai indah dengan pemandangan matahari terbenam.', required: false })
+  @ApiPropertyOptional({ example: 'Magelang, Jawa Tengah' })
   @IsString()
   @IsOptional()
-  deskripsi?: string;
+  lokasi?: string;
 
-  @ApiProperty({ example: 50000, description: 'Harga tiket masuk dalam Rupiah' })
+  @ApiProperty({ example: 50000 })
   @IsNumber()
   @IsNotEmpty()
   hargaTiket: number;

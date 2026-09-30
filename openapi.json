@@ -2,19 +2,6 @@
   "openapi": "3.0.0",
   "paths": {
     "/destinasi": {
-      "get": {
-        "operationId": "DestinasiController_findAll",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "Berhasil mengambil daftar destinasi."
-          }
-        },
-        "summary": "Mendapatkan semua daftar destinasi wisata",
-        "tags": [
-          "destinasi"
-        ]
-      },
       "post": {
         "operationId": "DestinasiController_create",
         "parameters": [],
@@ -30,13 +17,40 @@
         },
         "responses": {
           "201": {
-            "description": "Destinasi berhasil dibuat."
-          },
-          "400": {
-            "description": "Input data tidak valid."
+            "description": "Destinasi berhasil dibuat.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateDestinasiDto"
+                }
+              }
+            }
           }
         },
-        "summary": "Menambahkan destinasi wisata baru",
+        "summary": "Tambah destinasi baru",
+        "tags": [
+          "destinasi"
+        ]
+      },
+      "get": {
+        "operationId": "DestinasiController_findAll",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Daftar destinasi berhasil diambil.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CreateDestinasiDto"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "summary": "Ambil semua destinasi",
         "tags": [
           "destinasi"
         ]
@@ -57,13 +71,20 @@
         ],
         "responses": {
           "200": {
-            "description": "Detail destinasi ditemukan."
+            "description": "Detail destinasi ditemukan.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateDestinasiDto"
+                }
+              }
+            }
           },
           "404": {
             "description": "Destinasi tidak ditemukan."
           }
         },
-        "summary": "Mendapatkan detail destinasi berdasarkan ID",
+        "summary": "Ambil detail destinasi berdasarkan ID",
         "tags": [
           "destinasi"
         ]
@@ -92,13 +113,20 @@
         },
         "responses": {
           "200": {
-            "description": "Destinasi berhasil diperbarui."
+            "description": "Destinasi berhasil diperbarui.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateDestinasiDto"
+                }
+              }
+            }
           },
           "404": {
             "description": "Destinasi tidak ditemukan."
           }
         },
-        "summary": "Perbarui data destinasi berdasarkan ID",
+        "summary": "Perbarui sebagian data destinasi berdasarkan ID",
         "tags": [
           "destinasi"
         ]
@@ -117,13 +145,47 @@
         ],
         "responses": {
           "200": {
-            "description": "Destinasi berhasil dihapus."
+            "description": "Destinasi berhasil dihapus.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateDestinasiDto"
+                }
+              }
+            }
           },
           "404": {
             "description": "Destinasi tidak ditemukan."
           }
         },
-        "summary": "Menghapus destinasi berdasarkan ID",
+        "summary": "Hapus destinasi berdasarkan ID",
+        "tags": [
+          "destinasi"
+        ]
+      }
+    },
+    "/destinasi/{id}/ulasan": {
+      "get": {
+        "operationId": "DestinasiController_findUlasanByDestinasi",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Daftar ulasan berhasil diambil."
+          },
+          "404": {
+            "description": "Destinasi tidak ditemukan."
+          }
+        },
+        "summary": "Ambil semua ulasan berdasarkan ID destinasi",
         "tags": [
           "destinasi"
         ]
@@ -145,27 +207,24 @@
         "properties": {
           "nama": {
             "type": "string",
-            "example": "Pantai Kuta",
-            "description": "Nama destinasi wisata"
+            "example": "Candi Borobudur"
+          },
+          "kategori": {
+            "type": "string",
+            "example": "Budaya"
           },
           "lokasi": {
             "type": "string",
-            "example": "Badung, Bali",
-            "description": "Lokasi destinasi"
-          },
-          "deskripsi": {
-            "type": "string",
-            "example": "Pantai indah dengan pemandangan matahari terbenam."
+            "example": "Magelang, Jawa Tengah"
           },
           "hargaTiket": {
             "type": "number",
-            "example": 50000,
-            "description": "Harga tiket masuk dalam Rupiah"
+            "example": 50000
           }
         },
         "required": [
           "nama",
-          "lokasi",
+          "kategori",
           "hargaTiket"
         ]
       },
@@ -174,22 +233,19 @@
         "properties": {
           "nama": {
             "type": "string",
-            "example": "Pantai Kuta",
-            "description": "Nama destinasi wisata"
+            "example": "Candi Borobudur"
+          },
+          "kategori": {
+            "type": "string",
+            "example": "Budaya"
           },
           "lokasi": {
             "type": "string",
-            "example": "Badung, Bali",
-            "description": "Lokasi destinasi"
-          },
-          "deskripsi": {
-            "type": "string",
-            "example": "Pantai indah dengan pemandangan matahari terbenam."
+            "example": "Magelang, Jawa Tengah"
           },
           "hargaTiket": {
             "type": "number",
-            "example": 50000,
-            "description": "Harga tiket masuk dalam Rupiah"
+            "example": 50000
           }
         }
       }
